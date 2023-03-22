@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author drigo
+ *
+ */
+module interfaceGraficaEclipse {
+}

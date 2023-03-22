@@ -1,29 +1,35 @@
 package challenge_conversor_moedas;
 
-import javax.swing.JPanel;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JCheckBoxMenuItem;
-import java.awt.Choice;
+import javax.swing.*;
 
-public class TelaInicial extends JPanel {
-
-	/**
-	 * Create the panel.
-	 */
+public class TelaInicial extends JFrame{
+	
+	
+	// CONSTRUTOR
 	public TelaInicial() {
-		setBackground(Color.LIGHT_GRAY);
-		setLayout(null);
-		
-		JLabel lblEscolhaUmaOpo = new JLabel("ESCOLHA UMA OPÇÃO");
-		lblEscolhaUmaOpo.setBounds(23, 51, 122, 20);
-		add(lblEscolhaUmaOpo);
-		
-		Choice choice = new Choice();
-		choice.setBounds(23, 77, 28, 20);
-		add(choice);
+				
+		//CRIANDO UM FRAME A SER UTILIZADO PELO JOPTIONPANE
+		JFrame frame = new JFrame();
 
+		//CRIANDO UM ARRAY DE OPÇÕES PARA MOSTRAR NAS ESCOLAS DA JANELA
+		Object[] entradaSistema = {"CONVERSOR DE MOEDAS", "CONVERSOR DE TEMPERATURA"};
+		
+		//CRIANDO E INICIALIZANDO UMA VARIAVEL ICON PARA SER UTILIZADA PELO JOPTIONPANE
+		Icon icon = null;
+		
+		
+		//CRIANDO O SHOW INPUT DO JOPTION COM SEUS PARAMETROS (TIPOS DE OBJETO,
+		//MESNAGEM INICIAL, TITULO DA JANELA, OPÇÃO DE ICONE, ENTRADA DE VALORES DE OPÇÕES
+		//USANDO O OBJETC QUE CRIAMOS ACIMA E POR FIM, SETANDO QUAL SERA NOSSA OPÇÃO INICIAL
+		// A SER MOSTRADA NA LISTA
+		
+		String opcoesIniciais = (String)JOptionPane.showInputDialog(frame, "ESCOLHA SEU TIPO DE CONVERSOR","MENU", JOptionPane.QUESTION_MESSAGE, icon ,
+		                    entradaSistema,entradaSistema[0]);
+
+		
+		
+		
 	}
+	
+	
 }
