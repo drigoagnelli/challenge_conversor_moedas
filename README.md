@@ -1,5 +1,5 @@
 <h1 align="center"> CHALLENGE CONVERSOR DE MOEDAS </h1>
-<img src="C:\Users\drigo\Downloads\engrenagem.jpg" align="center">
+<img src="./engrenagem.jpg" align="middle" width="350" height="250">
  
  
  
