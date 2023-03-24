@@ -22,9 +22,5 @@ public class IniciarAplicacao {
 			menuPrincipal.analisarInput();
 			
 		});
-		
-		
-		
 	}
-
 }

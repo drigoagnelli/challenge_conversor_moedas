@@ -48,12 +48,7 @@ public class TelasRotinas {
 	public void telaMenuPrincipal() {
 		opcoesIniciais = (String)JOptionPane.showInputDialog(frame, "ESCOLHA SEU TIPO DE CONVERSOR","MENU", JOptionPane.QUESTION_MESSAGE, icon ,
 		             entradaSistema,entradaSistema[0]);
-		
-		if(opcoesIniciais == null) {
-			this.telaConcluidoPrograma();
-		}else {
-			this.telaInputValor();
-		}
+		apertouCancelarTelaInicial(opcoesIniciais);
 	}
 		
 	
@@ -61,22 +56,24 @@ public class TelasRotinas {
 	public void telaInputValor() {
 		valorAConverter = (String)JOptionPane.showInputDialog(frame, "INSIRA UM VALOR - DECIMAIS SEPARADOS POR PONTO","INPUT", JOptionPane.QUESTION_MESSAGE, icon ,
 	                null,null);
-		if(valorAConverter == null) {
-			this.telaConcluidoPrograma();
-		}
+		apertouCancelar(valorAConverter);
 	}
 	
 	//EXIBE O JOPTIONPANE DA TELA DE DESEJA CONTINUAR CONVERSÃO MOEDAS OU TEMPERATURA
 	public void telaDesejaContinuar() {
 		int codigo = JOptionPane.showOptionDialog(frame,"DESEJA CONTINUAR","ESCOLHA UMA OPÇÃO",
 				JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,	opcoes,	opcoes[0]);
-	    if(codigo == 0) {
-	    	 this.analisarInput();
-	    }else if (codigo == 1){
-	    	 this.telaFinalizarPrograma();
-	    }else {
-	    	 this.telaConcluidoPrograma();
-	    }
+	    switch (codigo) {
+		case 0:
+			this.telaMenuPrincipal();
+			this.analisarInput();
+		break;
+		case 1:
+			this.telaFinalizarPrograma();
+		break;
+		default:
+			this.telaConcluidoPrograma();
+		}
 	}
 		
 	//EXIBE O JOPTIONPANE DA TELA DE FINALIZAR O PROGRAMA	
@@ -96,18 +93,16 @@ public class TelasRotinas {
 			
 	//METODO COMPLETO PARA A VALIDAÇÃO DO INPUT CONVERSÃO DE MOEDAS OU DE TEMPERATURAS
 	public void analisarInput() {
-		
-		
 		while (this.validainputNumero(this.getValorAConverter()) == false) {
-			this.telaNumeroNaoDigitado();
-			this.telaMenuPrincipal();
-			this.telaInputValor();
+				this.telaNumeroNaoDigitado();
+				this.telaMenuPrincipal();
+				this.telaInputValor();
 		}
-			this.escolherAConversao(this.getOpcoesIniciais());
+		this.escolherAConversao(this.getOpcoesIniciais());
 		if (this.getOpcoesIniciais() == entradaSistema[0] ) {
-			this.converterMoedas(this.getOpcaoConversaoMoeda(), this.transformaInputEmInteger(this.getValorAConverter()));
+				this.converterMoedas(this.getOpcaoConversaoMoeda(), this.transformaInputEmInteger(this.getValorAConverter()));
 		}else {
-			this.converterTemperaturas(this.getOpcaoConversaoTemperaturas(), this.transformaInputEmInteger(this.getValorAConverter()));
+				this.converterTemperaturas(this.getOpcaoConversaoTemperaturas(), this.transformaInputEmInteger(this.getValorAConverter()));
 		}
 	}
 		
@@ -134,7 +129,24 @@ public class TelasRotinas {
 		}
 		return valido;
 	}
-		
+	
+	//METODO PARA VERIFICAR SE O BOTÃO CANCELAR FOI APERTADO, CASO POSITIVO, APRESENTA MENSGEM DE PROGRAMA CONCLUIDO.
+	public void apertouCancelar(String s) {
+		if(s == null) {
+			this.telaConcluidoPrograma();
+		}
+	}
+	
+	//METODO PARA VERIFICAR SE O BOTÃO CANCELAR FOI APERTADO, CASO POSITIVO, APRESENTA MENSGEM DE PROGRAMA CONCLUIDO.
+		public void apertouCancelarTelaInicial(String s) {
+			if(s == null) {
+				this.telaConcluidoPrograma();
+			}else {
+				this.telaInputValor();
+			}
+			
+		}
+	
 	
 	//METODOS CONVERSOR DE MOEDAS ---------------------------------------------------------------------------------------
 	
@@ -146,11 +158,9 @@ public class TelasRotinas {
 	
 	//EXIBE O JOPTIONPANE DA TELA DE ESCOLHA DE CONVERSÃO DE MOEDA
 	public void telaEscolhaConversaoMoedas() {
-		opcoesConversaoMoedas = (String)JOptionPane.showInputDialog(frame, "ESCOLHA A MOEDA PARA A QUAL VOCÊ DESEJA GIRAR SEU DINHEIRO","MOEDAS", JOptionPane.PLAIN_MESSAGE, icon ,
+		opcoesConversaoMoedas = (String)JOptionPane.showInputDialog(frame, "ESCOLHA A MOEDA PARA A QUAL VOCÊ DESEJA COVERTER A TEMPERATURA","MOEDAS", JOptionPane.PLAIN_MESSAGE, icon ,
 					listaConversoesMoedas,listaConversoesMoedas[0]);
-		if(opcoesConversaoMoedas == null) {
-			this.telaConcluidoPrograma();
-		}
+		apertouCancelar(opcoesConversaoMoedas);
 	}
 	
 	//METODO CONVERSÃO MOEDAS
@@ -169,9 +179,9 @@ public class TelasRotinas {
 	}
 	
 	//EXIBE O JOPTIONPANE DA TELA DE RESULTADO DA CONVERSÃO	DE MOEDAS
-		public void telaResultadoCovertidoMoeda(String simbolo, String nomeMoeda, double resultado) {
+	public void telaResultadoCovertidoMoeda(String simbolo, String nomeMoeda, double resultado) {
 			JOptionPane.showMessageDialog(frame, "O VALOR DA CONVERSÃO É : " + simbolo + " "  + Math.round(resultado*100.0)/100.0 + " " + nomeMoeda + " ." , "RETORNO DA CONVERSÃO", JOptionPane.INFORMATION_MESSAGE, null);;
-		}
+	}
 	
 	//MWTODOS CONVERSOR DE TEMPERATURAS ---------------------------------------------------------------------------------
 	
@@ -185,9 +195,7 @@ public class TelasRotinas {
 	public void telaEscolhaConversaoTemperaturas() {
 		opcoesConversaoTemperaturas = (String)JOptionPane.showInputDialog(frame, "ESCOLHA A TEMPERATURA PARA A QUAL VOCÊ DESEJA GIRAR SEU DINHEIRO","MOEDAS", JOptionPane.PLAIN_MESSAGE, icon ,
 						listaConversoesTemperaturas,listaConversoesTemperaturas[0]);
-		if(opcoesConversaoTemperaturas == null) {
-			this.telaConcluidoPrograma();
-		}
+		apertouCancelar(opcoesConversaoTemperaturas);
 	}
 		
 	//METODO CONVERSÃO TEMPERATURAS
@@ -196,32 +204,26 @@ public class TelasRotinas {
 		double resultado = 0;
 				
 		switch (s) {
-
 		case "DE CELSIUS A KELVIN":
 			resultado = valor + 273 ;
 			telaResultadoCovertidoTemperaturas(resultado, simbolosTemperatura[0], tipoTemperatura[0]);
 		break;
-
 		case "DE CELSIUS A FAHRENHEIT":
 			resultado = 1.8 * valor +32 ;
 			telaResultadoCovertidoTemperaturas(resultado, simbolosTemperatura[1], tipoTemperatura[1]);
 		break;
-
 		case "DE KELVIN A CELSIUS":
 			resultado = valor - 273 ;
 			telaResultadoCovertidoTemperaturas(resultado, simbolosTemperatura[2], tipoTemperatura[2]);
 		break;
-
 		case "DE FAHRENHEIT A CELSIUS":
 			resultado = (valor - 32)/ 1.8 ;
 			telaResultadoCovertidoTemperaturas(resultado, simbolosTemperatura[3], tipoTemperatura[3]);
 		break;
-		
 		case "DE FAHRENHEIT A KELVIN":
 			resultado = (valor - 32) * 5 / 9 + 273 ;
 			telaResultadoCovertidoTemperaturas(resultado, simbolosTemperatura[4], tipoTemperatura[4]);
 		break;
-		
 		default:
 			resultado = (valor - 273) * 1.8 + 32 ;
 			telaResultadoCovertidoTemperaturas(resultado, simbolosTemperatura[5], tipoTemperatura[5]);
